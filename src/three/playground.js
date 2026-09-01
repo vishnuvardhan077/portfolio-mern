@@ -72,6 +72,21 @@ export function setPlaygroundGeometry(type) {
     case 'sphere':
       geo = new THREE.SphereGeometry(1.4, 32, 32);
       break;
+    case 'octahedron':
+      geo = new THREE.OctahedronGeometry(1.5, 0);
+      break;
+    case 'tetrahedron':
+      geo = new THREE.TetrahedronGeometry(1.5, 0);
+      break;
+    case 'torus':
+      geo = new THREE.TorusGeometry(1.2, 0.4, 16, 100);
+      break;
+    case 'cylinder':
+      geo = new THREE.CylinderGeometry(1, 1, 2, 32);
+      break;
+    case 'cone':
+      geo = new THREE.ConeGeometry(1.2, 2.2, 32);
+      break;
     case 'icosahedron':
     default:
       geo = new THREE.IcosahedronGeometry(1.4, 1);

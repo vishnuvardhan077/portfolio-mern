@@ -13,8 +13,8 @@
   
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  
-  <script type="module" crossorigin src="./assets/index-C2GzH_6H.js"></script>
+  
+  <script type="module" crossorigin src="./assets/index-aYYVMMQV.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-CaDOJIzW.css">
 </head>
 <body class="theme-cyberpunk">
@@ -50,21 +50,10 @@
           <i class="fa-solid fa-volume-high" id="sound-icon"></i>
         </button>
 
-        <!-- Theme Switcher Dropdown -->
-        <div class="theme-dropdown">
-          <button id="theme-btn" class="icon-btn" title="Change 3D Theme">
-            <i class="fa-solid fa-palette"></i>
-          </button>
-          <div class="theme-menu" id="theme-menu">
-            <button data-theme="theme-black" class="theme-opt"><span class="dot" style="background:#fff;"></span> Pitch Black</button>
-            <button data-theme="theme-cyberpunk" class="theme-opt active"><span class="dot cyberpunk"></span> Cyberpunk</button>
-            <button data-theme="theme-purple" class="theme-opt"><span class="dot purple"></span> Neon Violet</button>
-            <button data-theme="theme-matrix" class="theme-opt"><span class="dot matrix"></span> Matrix Emerald</button>
-            <button data-theme="theme-gold" class="theme-opt"><span class="dot gold"></span> Solar Gold</button>
-            <button data-theme="theme-red" class="theme-opt"><span class="dot" style="background:#ef4444;"></span> Crimson Red</button>
-            <button data-theme="theme-blue" class="theme-opt"><span class="dot" style="background:#3b82f6;"></span> Midnight Blue</button>
-          </div>
-        </div>
+        <!-- Single AI Theme Morph Button -->
+        <button id="ai-theme-morph-btn" class="btn btn-outline btn-sm btn-glow" title="Cycle Infinite AI Themes">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> <span>AI Theme Morph</span>
+        </button>
 
         <!-- GitHub Profile Quick Link -->
         <a href="https://github.com/vishnuvardhan077" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
@@ -94,18 +83,11 @@
         <span class="gradient-text typewriter" id="typewriter">3D Web Experiences</span>
       </h1>
 
-      <!-- AI Prompt Theme Customizer Bar -->
+      <!-- Single AI Prompt Theme Customizer Bar -->
       <div class="prompt-theme-box glass-panel">
         <i class="fa-solid fa-wand-magic-sparkles prompt-icon"></i>
-        <input type="text" id="prompt-theme-input" class="prompt-input" placeholder="✨ Type a prompt e.g. 'change theme to black', 'matrix green', 'cyberpunk'..." />
+        <input type="text" id="prompt-theme-input" class="prompt-input" placeholder="✨ Type any prompt e.g. 'black', 'matrix green', 'cyberpunk', '#ff0055'..." />
         <button id="mic-btn" class="mic-btn" title="Voice Search Theme"><i class="fa-solid fa-microphone"></i></button>
-      </div>
-
-      <div class="prompt-suggestions">
-        <button class="prompt-chip" data-prompt="change theme to black">⚡ "change theme to black"</button>
-        <button class="prompt-chip" data-prompt="change theme to cyberpunk">🌌 "change theme to cyberpunk"</button>
-        <button class="prompt-chip" data-prompt="change theme to matrix green">🟢 "change theme to matrix green"</button>
-        <button class="prompt-chip" data-prompt="change theme to neon purple">🔮 "change theme to neon purple"</button>
       </div>
 
       <p class="hero-subtitle">
@@ -474,6 +456,11 @@
               <button class="chip-btn" data-geo="torusKnot">Torus Knot</button>
               <button class="chip-btn" data-geo="dodecahedron">Dodecahedron</button>
               <button class="chip-btn" data-geo="sphere">Sphere</button>
+              <button class="chip-btn" data-geo="octahedron">Octahedron</button>
+              <button class="chip-btn" data-geo="tetrahedron">Tetrahedron</button>
+              <button class="chip-btn" data-geo="torus">Torus Ring</button>
+              <button class="chip-btn" data-geo="cylinder">Cylinder</button>
+              <button class="chip-btn" data-geo="cone">Cone Crystal</button>
             </div>
           </div>
 

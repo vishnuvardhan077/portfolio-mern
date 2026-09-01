@@ -6,18 +6,22 @@
 import { initHeroScene, toggleWireframe, switchGeometryCore, triggerParticleBurst, updateHeroThemeColor } from './three/heroScene.js';
 import { initSkillUniverse, SKILL_DATA, setLayout } from './three/skillUniverse.js';
 import { initPlayground, setPlaygroundGeometry, setPlaygroundColor, setPlaygroundSpeed, setPlaygroundMetalness, setPlaygroundRoughness, togglePlaygroundWireframe, spawnStudioParticles } from './three/playground.js';
+import { initProjectMini3D, updateProjectMiniColors } from './three/project3D.js';
 import { toggleAudio, playHoverSound, playClickSound, playWarpSound, isAudioEnabled } from './utils/audio.js';
 import { parseThemePrompt, THEME_DEFINITIONS } from './utils/themePromptParser.js';
+
+let currentThemeKeys = ['black', 'cyberpunk', 'matrix', 'purple', 'red', 'gold', 'blue'];
+let currentThemeIdx = 1;
 
 document.addEventListener('DOMContentLoaded', () => {
   initCustomCursor();
   initAudioControls();
-  initThemeSwitcher();
   initAIPromptThemeCustomizer();
   initHeroSection();
   initTypewriter();
   initSkillsUniverseSection();
   init3DTiltCards();
+  initProjectMini3D();
   initProjectFilters();
   initGitHubSync();
   init3DStudioSection();
@@ -40,8 +44,7 @@ function initCustomCursor() {
     blur.style.top = `${e.clientY}px`;
   });
 
-  // Scale up on interactive hover
-  const interactables = document.querySelectorAll('a, button, input, textarea, .tilt-card, .btn-chip, .prompt-chip');
+  const interactables = document.querySelectorAll('a, button, input, textarea, .tilt-card, .btn-chip');
   interactables.forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.style.width = '24px';
@@ -59,49 +62,34 @@ function initCustomCursor() {
 function initAudioControls() {
   const soundBtn = document.getElementById('sound-btn');
   const soundIcon = document.getElementById('sound-icon');
-  const toast = document.getElementById('audio-toast');
-  const toastText = document.getElementById('toast-text');
 
   if (!soundBtn) return;
 
   soundBtn.addEventListener('click', () => {
     const enabled = toggleAudio();
     soundIcon.className = enabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
-    
-    if (toast && toastText) {
-      toastText.textContent = enabled ? 'Audio FX Enabled' : 'Audio Muted';
-      toast.classList.remove('hidden');
-      setTimeout(() => toast.classList.add('hidden'), 2500);
-    }
+    showToast(enabled ? 'Audio FX Enabled' : 'Audio Muted');
   });
 }
 
-/* Theme Switcher */
-function initThemeSwitcher() {
-  const themeOpts = document.querySelectorAll('.theme-opt');
-  
-  themeOpts.forEach(btn => {
-    btn.addEventListener('click', () => {
-      playClickSound();
-      const theme = btn.getAttribute('data-theme');
-      const themeKey = theme.replace('theme-', '');
-
-      themeOpts.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      if (THEME_DEFINITIONS[themeKey]) {
-        applyThemeFromDefinition(THEME_DEFINITIONS[themeKey]);
-      }
-    });
-  });
-}
-
-/* AI Prompt Theme Customizer Engine */
+/* AI Prompt Theme Customizer & Single AI Morph Button Engine */
 function initAIPromptThemeCustomizer() {
   const input = document.getElementById('prompt-theme-input');
   const micBtn = document.getElementById('mic-btn');
-  const chips = document.querySelectorAll('.prompt-chip');
+  const aiMorphBtn = document.getElementById('ai-theme-morph-btn');
 
+  // Single AI Morph Button (cycles through themes)
+  if (aiMorphBtn) {
+    aiMorphBtn.addEventListener('click', () => {
+      currentThemeIdx = (currentThemeIdx + 1) % currentThemeKeys.length;
+      const key = currentThemeKeys[currentThemeIdx];
+      if (THEME_DEFINITIONS[key]) {
+        applyThemeFromDefinition(THEME_DEFINITIONS[key]);
+      }
+    });
+  }
+
+  // Single AI Prompt Input Box
   if (input) {
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
@@ -109,14 +97,6 @@ function initAIPromptThemeCustomizer() {
       }
     });
   }
-
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      const prompt = chip.getAttribute('data-prompt');
-      if (input) input.value = prompt;
-      processPrompt(prompt);
-    });
-  });
 
   // Web Speech API Voice Recognition
   if (micBtn) {
@@ -183,13 +163,7 @@ function applyThemeFromDefinition(def) {
   // Update Three.js 3D WebGL Scene Lights and Core Colors
   updateHeroThemeColor(def.primaryNum, def.secondaryNum);
   setPlaygroundColor(def.primaryHex);
-
-  // Update active state in theme dropdown
-  const themeOpts = document.querySelectorAll('.theme-opt');
-  themeOpts.forEach(b => {
-    const attr = b.getAttribute('data-theme');
-    b.classList.toggle('active', attr === def.className);
-  });
+  updateProjectMiniColors(def.primaryHex);
 
   showToast(`🎨 ${def.desc || 'Theme updated!'}`);
 }
@@ -379,7 +353,6 @@ function initProjectFilters() {
     });
   });
 
-  // Modal Inspection Handlers
   const inspectBtns = document.querySelectorAll('.inspect-project-btn');
   const modal = document.getElementById('project-modal');
   const modalTitle = document.getElementById('modal-title');
