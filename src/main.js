@@ -1,6 +1,6 @@
 /* ==========================================================================
-   3D WEBGL DEVELOPER PORTFOLIO - MAIN ORCHESTRATOR
-   VISHNU VARDHAN (vishnuvardhan077)
+   DEVELOPER PORTFOLIO - MAIN APPLICATION ORCHESTRATOR
+   Vishnu Vardhan (vishnuvardhan077)
    ========================================================================== */
 
 import { initHeroScene, toggleWireframe, switchGeometryCore, triggerParticleBurst, updateHeroThemeColor } from './three/heroScene.js';
@@ -10,14 +10,14 @@ import { initProjectMini3D, updateProjectMiniColors } from './three/project3D.js
 import { toggleAudio, playHoverSound, playClickSound, playWarpSound, isAudioEnabled } from './utils/audio.js';
 import { parseThemePrompt, THEME_DEFINITIONS } from './utils/themePromptParser.js';
 
-let currentThemeKeys = ['black', 'cyberpunk', 'matrix', 'purple', 'red', 'gold', 'blue'];
-let currentThemeIdx = 1;
+let currentThemeKeys = ['cyberpunk', 'purple', 'matrix', 'black', 'red', 'gold', 'blue'];
+let currentThemeIdx = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
   initWelcomePortal();
   initCustomCursor();
   initAudioControls();
-  initAIPromptThemeCustomizer();
+  initThemeSwitcher();
   initHeroSection();
   initTypewriter();
   initSkillsUniverseSection();
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
 });
 
-/* 3D Holographic Welcome Portal */
+/* Welcome Portal Overlay Handler */
 function initWelcomePortal() {
   const portal = document.getElementById('welcome-portal');
   const enterBtn = document.getElementById('enter-portal-btn');
@@ -90,77 +90,18 @@ function initAudioControls() {
   });
 }
 
-/* AI Prompt Theme Customizer & Single AI Morph Button Engine */
-function initAIPromptThemeCustomizer() {
-  const input = document.getElementById('prompt-theme-input');
-  const micBtn = document.getElementById('mic-btn');
-  const aiMorphBtn = document.getElementById('ai-theme-morph-btn');
+/* Theme Switcher Handler */
+function initThemeSwitcher() {
+  const themeBtn = document.getElementById('ai-theme-morph-btn');
 
-  if (aiMorphBtn) {
-    aiMorphBtn.addEventListener('click', () => {
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
       currentThemeIdx = (currentThemeIdx + 1) % currentThemeKeys.length;
       const key = currentThemeKeys[currentThemeIdx];
       if (THEME_DEFINITIONS[key]) {
         applyThemeFromDefinition(THEME_DEFINITIONS[key]);
       }
     });
-  }
-
-  if (input) {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        processPrompt(input.value);
-      }
-    });
-  }
-
-  if (micBtn) {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (SpeechRecognition) {
-      const recognition = new SpeechRecognition();
-      recognition.continuous = false;
-      recognition.lang = 'en-US';
-
-      micBtn.addEventListener('click', () => {
-        playWarpSound();
-        micBtn.classList.add('listening');
-        showToast('🎙️ Listening for voice prompt...');
-        try {
-          recognition.start();
-        } catch (err) {
-          micBtn.classList.remove('listening');
-        }
-      });
-
-      recognition.onresult = (event) => {
-        micBtn.classList.remove('listening');
-        const transcript = event.results[0][0].transcript;
-        if (input) input.value = transcript;
-        processPrompt(transcript);
-      };
-
-      recognition.onerror = () => {
-        micBtn.classList.remove('listening');
-        showToast('Mic error. Type prompt instead!');
-      };
-
-      recognition.onend = () => {
-        micBtn.classList.remove('listening');
-      };
-    } else {
-      micBtn.addEventListener('click', () => {
-        showToast('Type your prompt in the search box!');
-      });
-    }
-  }
-}
-
-function processPrompt(promptText) {
-  if (!promptText) return;
-  const themeDef = parseThemePrompt(promptText);
-
-  if (themeDef) {
-    applyThemeFromDefinition(themeDef);
   }
 }
 
@@ -179,7 +120,7 @@ function applyThemeFromDefinition(def) {
   setPlaygroundColor(def.primaryHex);
   updateProjectMiniColors(def.primaryHex);
 
-  showToast(`🎨 ${def.desc || 'Theme updated!'}`);
+  showToast(`🎨 Theme: ${def.name || 'Updated'}`);
 }
 
 function showToast(msg) {
@@ -188,7 +129,7 @@ function showToast(msg) {
   if (toast && toastText) {
     toastText.textContent = msg;
     toast.classList.remove('hidden');
-    setTimeout(() => toast.classList.add('hidden'), 3500);
+    setTimeout(() => toast.classList.add('hidden'), 3000);
   }
 }
 
@@ -229,16 +170,16 @@ function initHeroSection() {
   }
 }
 
-/* Typewriter Animation */
+/* Typewriter Text Animation */
 function initTypewriter() {
   const typewriter = document.getElementById('typewriter');
   if (!typewriter) return;
 
   const phrases = [
     '3D Web Experiences',
-    'MERN Stack Architecture',
+    'Full-Stack MERN Apps',
     'WebGL Graphics & Shaders',
-    'Interactive Extensions'
+    'Interactive Tools'
   ];
 
   let phraseIdx = 0;
@@ -273,7 +214,7 @@ function initTypewriter() {
   type();
 }
 
-/* 3D Skills Universe */
+/* 3D Skills Universe Section */
 function initSkillsUniverseSection() {
   const container = document.getElementById('skills-canvas-container');
   if (!container) return;
@@ -341,7 +282,7 @@ function init3DTiltCards() {
   });
 }
 
-/* Project Filter Pills */
+/* Project Filter Handling */
 function initProjectFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
@@ -378,15 +319,15 @@ function initProjectFilters() {
   const projectDetails = {
     'portfolio-mern': {
       title: 'portfolio-mern',
-      desc: 'Full-Stack MERN Developer Portfolio application featuring responsive dark design, REST API endpoints, MongoDB schemas, and dynamic project showcasing.',
+      desc: 'Full-Stack MERN Developer Portfolio application featuring responsive design, REST API integration, MongoDB database schemas, and dynamic project showcase.',
       repo: 'https://github.com/vishnuvardhan077/portfolio-mern',
       tags: ['MongoDB', 'Express', 'React', 'Node.js', 'REST API']
     },
     'Student_Course_Management_System': {
       title: 'Student Course Management System',
-      desc: 'System application developed in Java for managing student course enrollments, grade calculations, professor allocations, and academic reports.',
+      desc: 'System application developed in Java for managing student course enrollments, grade processing, professor allocations, and academic reports.',
       repo: 'https://github.com/vishnuvardhan077/Student_Course_Management_System',
-      tags: ['Java', 'OOP', 'Data Structures', 'Database Design']
+      tags: ['Java', 'OOP Architecture', 'Data Structures', 'Database']
     },
     'cricket-extension': {
       title: 'Cricket Hub Chrome Extension',
@@ -395,10 +336,10 @@ function initProjectFilters() {
       tags: ['JavaScript ES6+', 'Manifest V3', 'HTML5/CSS3', 'Storage API']
     },
     'Mini-project': {
-      title: 'Mini-project Full Stack Application',
+      title: 'Mini-project Application',
       desc: 'Modular full-stack application exploring state management, component lifecycles, and rapid API integrations.',
       repo: 'https://github.com/vishnuvardhan077/Mini-project',
-      tags: ['JavaScript', 'React', 'Node.js', 'CSS Modules']
+      tags: ['JavaScript', 'React', 'Node.js', 'Web API']
     },
     'java-project': {
       title: 'java-project Repository',
@@ -432,7 +373,7 @@ function initProjectFilters() {
   if (dismissBtn) dismissBtn.addEventListener('click', () => modal.classList.add('hidden'));
 }
 
-/* GitHub Live Sync */
+/* GitHub API Live Sync */
 async function initGitHubSync() {
   try {
     const res = await fetch('https://api.github.com/users/vishnuvardhan077/repos');
@@ -460,7 +401,7 @@ async function initGitHubSync() {
   }
 }
 
-/* 3D Studio Playground Section */
+/* 3D Studio Section */
 function init3DStudioSection() {
   const container = document.getElementById('playground-canvas-container');
   const fpsEl = document.getElementById('fps-counter');
@@ -533,7 +474,7 @@ function init3DStudioSection() {
   }
 }
 
-/* Contact Form Handling */
+/* Contact Form Submission */
 function initContactForm() {
   const form = document.getElementById('contact-form');
 
@@ -543,12 +484,12 @@ function initContactForm() {
     e.preventDefault();
     playWarpSound();
     triggerParticleBurst();
-    showToast('🚀 3D Signal Transmitted to Vishnu!');
+    showToast('🚀 Message sent to Vishnu!');
     form.reset();
   });
 }
 
-/* Navigation scroll & mobile menu */
+/* Navigation Scroll & Mobile Menu */
 function initNavigation() {
   const mobileToggle = document.getElementById('mobile-toggle');
   const navMenu = document.getElementById('nav-menu');

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vishnu Vardhan's Portfolio — 3D Web Architect & Full Stack Developer</title>
-  <meta name="description" content="Interactive 3D Portfolio of Vishnu Vardhan (vishnuvardhan077) - Full-Stack MERN & WebGL 3D Developer featuring interactive 3D canvas, skill universe, and project playground." />
+  <title>Vishnu Vardhan — Full Stack MERN & 3D Web Developer</title>
+  <meta name="description" content="Developer Portfolio of Vishnu Vardhan (vishnuvardhan077) - Full-Stack MERN & 3D Interactive Web Developer featuring Three.js WebGL graphics, project showcase, and 3D studio." />
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,12 +13,12 @@
   
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  
-  <script type="module" crossorigin src="./assets/index-CnndMdR0.js"></script>
+  
+  <script type="module" crossorigin src="./assets/index-CL6P2GRS.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-bslg6Wz7.css">
 </head>
 <body class="theme-cyberpunk">
-  <!-- 3D Holographic Welcome Portal Entrance Overlay -->
+  <!-- Welcome Portal Overlay -->
   <div id="welcome-portal" class="welcome-portal">
     <div class="portal-card glass-panel">
       <div class="card-glow"></div>
@@ -26,11 +26,11 @@
         <div class="emblem-ring"></div>
         <div class="emblem-core">VV</div>
       </div>
-      <span class="portal-badge"><i class="fa-solid fa-sparkles"></i> Interactive 3D Web Experience</span>
+      <span class="portal-badge"><i class="fa-solid fa-hand-wave"></i> Welcome Experience</span>
       <h1 class="portal-title"><span class="gradient-text">Welcome to My Portfolio</span></h1>
-      <p class="portal-subtitle">Step into an interactive 3D WebGL universe created by Vishnu Vardhan — featuring custom shaders, skill constellations, 3D project models & audio FX.</p>
+      <p class="portal-subtitle">Hi, I'm Vishnu Vardhan! Explore my full-stack MERN applications, custom 3D WebGL graphics, and software projects.</p>
       <button id="enter-portal-btn" class="btn btn-primary btn-glow portal-btn">
-        <i class="fa-solid fa-atom"></i> Enter 3D Dimension
+        <i class="fa-solid fa-arrow-right"></i> Explore Portfolio
       </button>
     </div>
   </div>
@@ -39,12 +39,12 @@
   <div id="custom-cursor"></div>
   <div id="cursor-blur"></div>
 
-  <!-- Audio Synth & Sound FX Indicator -->
+  <!-- Audio Toast Notification -->
   <div id="audio-toast" class="toast hidden">
     <i class="fa-solid fa-volume-high"></i> <span id="toast-text">Audio FX Enabled</span>
   </div>
 
-  <!-- Navbar -->
+  <!-- Header & Navbar -->
   <header class="navbar">
     <div class="nav-container">
       <a href="#hero" class="nav-logo">
@@ -54,25 +54,25 @@
 
       <nav class="nav-menu" id="nav-menu">
         <a href="#hero" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a>
-        <a href="#about" class="nav-link"><i class="fa-solid fa-user-astronaut"></i> About</a>
+        <a href="#about" class="nav-link"><i class="fa-solid fa-user"></i> About</a>
         <a href="#skills" class="nav-link"><i class="fa-solid fa-cubes"></i> 3D Skills</a>
-        <a href="#projects" class="nav-link"><i class="fa-solid fa-rocket"></i> Projects</a>
-        <a href="#studio" class="nav-link"><i class="fa-solid fa-atom"></i> 3D Studio</a>
-        <a href="#contact" class="nav-link"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+        <a href="#projects" class="nav-link"><i class="fa-solid fa-code"></i> Projects</a>
+        <a href="#studio" class="nav-link"><i class="fa-solid fa-shapes"></i> 3D Studio</a>
+        <a href="#contact" class="nav-link"><i class="fa-solid fa-envelope"></i> Contact</a>
       </nav>
 
       <div class="nav-actions">
-        <!-- Sound FX Toggle -->
+        <!-- Sound Toggle -->
         <button id="sound-btn" class="icon-btn" title="Toggle Sound FX">
           <i class="fa-solid fa-volume-high" id="sound-icon"></i>
         </button>
 
-        <!-- STRICTLY THE ONLY OPTION TO CHANGE THEMES -->
-        <button id="ai-theme-morph-btn" class="btn btn-outline btn-sm btn-glow" title="Click to Morph Color Theme">
-          <i class="fa-solid fa-palette"></i> <span>Change Theme</span>
+        <!-- Single Theme Switcher Option -->
+        <button id="ai-theme-morph-btn" class="btn btn-outline btn-sm btn-glow" title="Change Theme Palette">
+          <i class="fa-solid fa-palette"></i> <span>Theme</span>
         </button>
 
-        <!-- GitHub Profile Quick Link -->
+        <!-- GitHub Link -->
         <a href="https://github.com/vishnuvardhan077" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
           <i class="fa-brands fa-github"></i> <span>GitHub</span>
         </a>
@@ -92,7 +92,7 @@
     
     <div class="hero-overlay-content">
       <div class="hero-badge">
-        <span class="pulse-status"></span> Interactive 3D Web Experience
+        <span class="pulse-status"></span> Open for Opportunities & Collaborations
       </div>
 
       <h1 class="hero-title">
@@ -109,16 +109,16 @@
           <i class="fa-solid fa-rocket"></i> Explore Work
         </a>
         <a href="#studio" class="btn btn-secondary">
-          <i class="fa-solid fa-cubes-stacked"></i> Open 3D Studio
+          <i class="fa-solid fa-cubes"></i> 3D Studio
         </a>
         <a href="#contact" class="btn btn-outline">
-          <i class="fa-solid fa-paper-plane"></i> Let's Talk
+          <i class="fa-solid fa-paper-plane"></i> Contact Me
         </a>
       </div>
 
       <!-- 3D Scene Controls Panel -->
       <div class="hero-3d-controls glass-panel">
-        <div class="control-label"><i class="fa-solid fa-sliders"></i> Hero 3D Controls:</div>
+        <div class="control-label"><i class="fa-solid fa-sliders"></i> 3D Controls:</div>
         <div class="control-btns">
           <button id="hero-wireframe-toggle" class="btn-chip" title="Toggle Mesh Wireframe">
             <i class="fa-solid fa-border-none"></i> Wireframe Mode
@@ -143,7 +143,7 @@
         <div class="stat-divider"></div>
         <div class="stat-item">
           <div class="stat-num">MERN</div>
-          <div class="stat-label">Stack Expertise</div>
+          <div class="stat-label">Full-Stack Tech</div>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-item">
@@ -153,7 +153,7 @@
         <div class="stat-divider"></div>
         <div class="stat-item">
           <div class="stat-num">100%</div>
-          <div class="stat-label">Responsive & Interactive</div>
+          <div class="stat-label">Responsive Design</div>
         </div>
       </div>
     </div>
@@ -163,13 +163,13 @@
   <section id="about" class="section about-section">
     <div class="section-container">
       <div class="section-header text-center">
-        <span class="section-tag"><i class="fa-solid fa-user-astronaut"></i> Biography</span>
-        <h2 class="section-title">Architecting Digital Dimensions</h2>
-        <p class="section-subtitle">Combining clean full-stack architecture with immersive 3D WebGL experiences.</p>
+        <span class="section-tag"><i class="fa-solid fa-user"></i> Biography</span>
+        <h2 class="section-title">About Me</h2>
+        <p class="section-subtitle">Combining clean full-stack architecture with interactive 3D WebGL experiences.</p>
       </div>
 
       <div class="about-grid">
-        <!-- Interactive 3D Card -->
+        <!-- Developer Profile Card -->
         <div class="about-card glass-panel tilt-card">
           <div class="card-glow"></div>
           <div class="about-avatar-box">
@@ -191,34 +191,34 @@
 
         <!-- Bio Details -->
         <div class="about-content glass-panel">
-          <h3>Passionate About High-Performance Interactive Web Applications</h3>
+          <h3>Full-Stack Engineer & Interactive Web Developer</h3>
           <p>
-            I am a full-stack developer dedicated to building responsive, feature-rich web platforms and captivating 3D web experiences. With hands-on experience developing complete MERN stack applications, Java course systems, and Chrome extensions, I bridge the gap between powerful backend logic and visually astonishing frontend interfaces.
+            I am a passionate software developer focused on crafting responsive web applications, custom RESTful APIs, and engaging 3D WebGL interfaces. With experience in the MERN stack, Java systems, and Google Chrome Extensions, I enjoy turning complex ideas into clean, functional code.
           </p>
           <p>
-            Whether it's creating real-time dynamic web extensions, designing complex database workflows, or implementing WebGL shaders and 3D particle systems in Three.js, I focus on performance, aesthetics, and user delight.
+            Whether building real-time browser extensions, designing database schemas in MongoDB, or creating interactive 3D WebGL visualizers with Three.js, I emphasize clean architecture, high performance, and user experience.
           </p>
 
           <div class="about-features">
             <div class="feature-box">
               <div class="feature-icon"><i class="fa-solid fa-layer-group"></i></div>
               <div>
-                <h4>Full-Stack Mastery</h4>
-                <p>MongoDB, Express.js, React.js, Node.js architecture with clean APIs.</p>
+                <h4>Full-Stack Development</h4>
+                <p>MongoDB, Express.js, React.js, and Node.js backend integration.</p>
               </div>
             </div>
             <div class="feature-box">
               <div class="feature-icon"><i class="fa-solid fa-cube"></i></div>
               <div>
-                <h4>3D & Interactive WebGL</h4>
-                <p>Custom 3D geometries, particle networks, dynamic lighting & shaders.</p>
+                <h4>3D WebGL Graphics</h4>
+                <p>Interactive 3D geometry rendering, particle systems, and lighting with Three.js.</p>
               </div>
             </div>
             <div class="feature-box">
               <div class="feature-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
               <div>
-                <h4>Browser Extensions & Tooling</h4>
-                <p>Chrome Extension Manifest v3 engineering and real-time data widgets.</p>
+                <h4>Browser Extensions</h4>
+                <p>Chrome Extension Manifest v3 engineering and real-time dashboard widgets.</p>
               </div>
             </div>
           </div>
@@ -231,9 +231,9 @@
   <section id="skills" class="section skills-section">
     <div class="section-container">
       <div class="section-header text-center">
-        <span class="section-tag"><i class="fa-solid fa-cubes"></i> Interactive 3D Tech Stack</span>
-        <h2 class="section-title">3D Skill Constellation</h2>
-        <p class="section-subtitle">Drag, rotate, and interact with the 3D WebGL skill universe.</p>
+        <span class="section-tag"><i class="fa-solid fa-cubes"></i> Technologies</span>
+        <h2 class="section-title">3D Skill Universe</h2>
+        <p class="section-subtitle">Drag, rotate, and click nodes to inspect technologies in the 3D WebGL space.</p>
       </div>
 
       <div class="skills-3d-layout">
@@ -242,22 +242,22 @@
           <div id="skills-canvas-container" class="skills-canvas-container"></div>
           
           <div class="skills-canvas-controls">
-            <span class="hint-text"><i class="fa-solid fa-hand-pointer"></i> Drag to rotate universe | Click nodes to inspect</span>
+            <span class="hint-text"><i class="fa-solid fa-hand-pointer"></i> Drag to rotate | Click nodes to inspect</span>
             <div class="layout-toggle-btns">
               <button id="skill-layout-sphere" class="btn-chip active" title="Sphere Layout">Sphere</button>
-              <button id="skill-layout-helix" class="btn-chip" title="Helix Ring Layout">Helix</button>
-              <button id="skill-layout-grid" class="btn-chip" title="3D Grid Layout">Grid</button>
+              <button id="skill-layout-helix" class="btn-chip" title="Helix Layout">Helix</button>
+              <button id="skill-layout-grid" class="btn-chip" title="Grid Layout">Grid</button>
             </div>
           </div>
         </div>
 
-        <!-- Selected Skill Detail Sidebar Card -->
+        <!-- Skill Detail Card -->
         <div class="skill-detail-card glass-panel" id="skill-detail-card">
           <div class="skill-detail-header">
             <div class="skill-icon-badge" id="skill-detail-icon"><i class="fa-brands fa-react"></i></div>
             <div>
               <h3 id="skill-detail-name">React.js</h3>
-              <span class="skill-category-tag" id="skill-detail-category">Frontend Framework</span>
+              <span class="skill-category-tag" id="skill-detail-category">Frontend Library</span>
             </div>
           </div>
           <div class="skill-proficiency">
@@ -267,10 +267,10 @@
             </div>
           </div>
           <p id="skill-detail-desc" class="skill-desc">
-            Building component-driven stateful user interfaces with modern hooks, context API, and optimized rendering.
+            Building component-driven user interfaces with modern hooks, context API, and state management.
           </p>
           <div class="skill-used-in">
-            <strong>Key Projects:</strong>
+            <strong>Used in Projects:</strong>
             <div class="tags-container" id="skill-detail-projects">
               <span class="tag">portfolio-mern</span>
               <span class="tag">Mini-project</span>
@@ -281,21 +281,21 @@
     </div>
   </section>
 
-  <!-- 3D Projects Showcase Section -->
+  <!-- Projects Showcase Section -->
   <section id="projects" class="section projects-section">
     <div class="section-container">
       <div class="section-header text-center">
-        <span class="section-tag"><i class="fa-solid fa-rocket"></i> Featured Work</span>
+        <span class="section-tag"><i class="fa-solid fa-code"></i> Featured Work</span>
         <h2 class="section-title">Projects Showcase</h2>
-        <p class="section-subtitle">Real-world applications, MERN stack solutions, and browser tools created by Vishnu.</p>
+        <p class="section-subtitle">Explore my full-stack MERN applications, browser tools, and Java repositories.</p>
         
-        <!-- GitHub Live Status Alert -->
+        <!-- GitHub Sync Alert -->
         <div class="github-sync-status" id="github-sync-status">
           <i class="fa-brands fa-github"></i> Synchronized with GitHub API (vishnuvardhan077)
         </div>
       </div>
 
-      <!-- Project Filter Pills -->
+      <!-- Project Filter Buttons -->
       <div class="project-filters">
         <button class="filter-btn active" data-filter="all">All Projects</button>
         <button class="filter-btn" data-filter="mern">MERN / Web</button>
@@ -303,7 +303,7 @@
         <button class="filter-btn" data-filter="java">Java & Systems</button>
       </div>
 
-      <!-- Projects Grid with 3D Tilt Effect -->
+      <!-- Projects Grid -->
       <div class="projects-grid" id="projects-grid">
         <!-- Project 1: portfolio-mern -->
         <div class="project-card glass-panel tilt-card" data-category="mern" data-id="portfolio-mern">
@@ -323,7 +323,7 @@
             </div>
             <div class="project-actions">
               <button class="btn btn-sm btn-primary inspect-project-btn" data-id="portfolio-mern">
-                <i class="fa-solid fa-eye"></i> Inspect 3D
+                <i class="fa-solid fa-eye"></i> Details
               </button>
               <a href="https://github.com/vishnuvardhan077/portfolio-mern" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
                 <i class="fa-brands fa-github"></i> Code
@@ -336,12 +336,12 @@
         <div class="project-card glass-panel tilt-card" data-category="java" data-id="Student_Course_Management_System">
           <div class="card-glow"></div>
           <div class="project-banner bg-gradient-2">
-            <div class="project-3d-badge"><i class="fa-solid fa-graduation-cap"></i> System App</div>
+            <div class="project-3d-badge"><i class="fa-solid fa-graduation-cap"></i> Java App</div>
             <div class="project-icon-large"><i class="fa-solid fa-book-bookmark"></i></div>
           </div>
           <div class="project-body">
             <h3 class="project-title">Student Course Management</h3>
-            <p class="project-desc">Enterprise system designed to streamline student registration, course allocations, grade processing, and administrative tracking.</p>
+            <p class="project-desc">System application designed in Java to manage student course enrollments, grade processing, and academic records.</p>
             <div class="project-tags">
               <span class="tag">Java</span>
               <span class="tag">OOP Architecture</span>
@@ -349,7 +349,7 @@
             </div>
             <div class="project-actions">
               <button class="btn btn-sm btn-primary inspect-project-btn" data-id="Student_Course_Management_System">
-                <i class="fa-solid fa-eye"></i> Inspect 3D
+                <i class="fa-solid fa-eye"></i> Details
               </button>
               <a href="https://github.com/vishnuvardhan077/Student_Course_Management_System" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
                 <i class="fa-brands fa-github"></i> Code
@@ -367,7 +367,7 @@
           </div>
           <div class="project-body">
             <h3 class="project-title">Cricket Hub Chrome Extension</h3>
-            <p class="project-desc">Feature-rich Chrome Extension delivering real-time cricket scores, interactive match statistics, custom new tab widgets, and settings customization.</p>
+            <p class="project-desc">Feature-rich Chrome Extension delivering real-time cricket scores, interactive match statistics, and custom new tab widgets.</p>
             <div class="project-tags">
               <span class="tag">JavaScript</span>
               <span class="tag">Manifest V3</span>
@@ -376,9 +376,9 @@
             </div>
             <div class="project-actions">
               <button class="btn btn-sm btn-primary inspect-project-btn" data-id="cricket-extension">
-                <i class="fa-solid fa-eye"></i> Inspect 3D
+                <i class="fa-solid fa-eye"></i> Details
               </button>
-              <span class="badge-local"><i class="fa-solid fa-folder-check"></i> Local Workspace</span>
+              <span class="badge-local"><i class="fa-solid fa-folder-check"></i> Local Project</span>
             </div>
           </div>
         </div>
@@ -391,8 +391,8 @@
             <div class="project-icon-large"><i class="fa-solid fa-shapes"></i></div>
           </div>
           <div class="project-body">
-            <h3 class="project-title">Mini-project Full Stack Application</h3>
-            <p class="project-desc">Modular web application focused on rapid data processing, dynamic user interactions, and state management techniques.</p>
+            <h3 class="project-title">Mini-project Application</h3>
+            <p class="project-desc">Modular web application focused on data processing, dynamic UI components, and state management techniques.</p>
             <div class="project-tags">
               <span class="tag">JavaScript</span>
               <span class="tag">React</span>
@@ -401,7 +401,7 @@
             </div>
             <div class="project-actions">
               <button class="btn btn-sm btn-primary inspect-project-btn" data-id="Mini-project">
-                <i class="fa-solid fa-eye"></i> Inspect 3D
+                <i class="fa-solid fa-eye"></i> Details
               </button>
               <a href="https://github.com/vishnuvardhan077/Mini-project" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
                 <i class="fa-brands fa-github"></i> Code
@@ -419,15 +419,15 @@
           </div>
           <div class="project-body">
             <h3 class="project-title">java-project Repository</h3>
-            <p class="project-desc">Collection of robust object-oriented software patterns, algorithmic challenges, and data structures implemented in Java.</p>
+            <p class="project-desc">Repository of object-oriented programming solutions, algorithms, and data structures implemented in Java.</p>
             <div class="project-tags">
               <span class="tag">Java</span>
-              <span class="tag">Data Structures</span>
               <span class="tag">Algorithms</span>
+              <span class="tag">Data Structures</span>
             </div>
             <div class="project-actions">
               <button class="btn btn-sm btn-primary inspect-project-btn" data-id="java-project">
-                <i class="fa-solid fa-eye"></i> Inspect 3D
+                <i class="fa-solid fa-eye"></i> Details
               </button>
               <a href="https://github.com/vishnuvardhan077/java-project" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
                 <i class="fa-brands fa-github"></i> Code
@@ -439,23 +439,23 @@
     </div>
   </section>
 
-  <!-- 3D Interactive Studio / Playground Section -->
+  <!-- 3D Interactive Playground Section -->
   <section id="studio" class="section studio-section">
     <div class="section-container">
       <div class="section-header text-center">
-        <span class="section-tag"><i class="fa-solid fa-atom"></i> WebGL Lab</span>
-        <h2 class="section-title">3D Interactive Playground</h2>
-        <p class="section-subtitle">Experiment with real-time WebGL geometries, material physics, lighting, and particle dynamics.</p>
+        <span class="section-tag"><i class="fa-solid fa-shapes"></i> Interactive Studio</span>
+        <h2 class="section-title">3D WebGL Playground</h2>
+        <p class="section-subtitle">Experiment with real-time 3D geometries, materials, lighting, and particle effects.</p>
       </div>
 
       <div class="studio-workspace glass-panel">
-        <!-- 3D Canvas Box -->
+        <!-- 3D Canvas Container -->
         <div class="studio-canvas-wrapper">
           <div id="playground-canvas-container" class="playground-canvas-container"></div>
           <div class="canvas-fps-counter" id="fps-counter">60 FPS</div>
         </div>
 
-        <!-- Studio Control Panel -->
+        <!-- Controls Panel -->
         <div class="studio-controls-panel">
           <h3><i class="fa-solid fa-sliders"></i> Geometry & Material Controls</h3>
 
@@ -526,13 +526,13 @@
     </div>
   </section>
 
-  <!-- Experience & Journey Timeline -->
+  <!-- Journey Timeline -->
   <section id="experience" class="section experience-section">
     <div class="section-container">
       <div class="section-header text-center">
-        <span class="section-tag"><i class="fa-solid fa-timeline"></i> Milestones</span>
+        <span class="section-tag"><i class="fa-solid fa-graduation-cap"></i> Journey</span>
         <h2 class="section-title">Developer Journey</h2>
-        <p class="section-subtitle">Growth path in web development, 3D graphics, and full-stack engineering.</p>
+        <p class="section-subtitle">My path in full-stack web development, software engineering, and 3D graphics.</p>
       </div>
 
       <div class="timeline glass-panel">
@@ -540,8 +540,8 @@
           <div class="timeline-dot"><i class="fa-solid fa-cube"></i></div>
           <div class="timeline-content">
             <span class="timeline-date">2026 — Present</span>
-            <h3>3D WebGL & Modern Web Architect</h3>
-            <p>Mastering Three.js, WebGL shader math, interactive 3D portfolio designs, and full-stack MERN integrations.</p>
+            <h3>3D Web & Modern Web Development</h3>
+            <p>Developing interactive web applications using Three.js, WebGL shaders, React, and full-stack MERN services.</p>
           </div>
         </div>
 
@@ -550,7 +550,7 @@
           <div class="timeline-content">
             <span class="timeline-date">2025 — 2026</span>
             <h3>Full Stack MERN Developer</h3>
-            <p>Developed core web applications (`portfolio-mern`, `Mini-project`) utilizing MongoDB schemas, Express API endpoints, React UI state, and Node.js servers.</p>
+            <p>Built full-stack applications (`portfolio-mern`, `Mini-project`) utilizing MongoDB schemas, Express APIs, React UI components, and Node.js servers.</p>
           </div>
         </div>
 
@@ -558,8 +558,8 @@
           <div class="timeline-dot"><i class="fa-solid fa-puzzle-piece"></i></div>
           <div class="timeline-content">
             <span class="timeline-date">2025</span>
-            <h3>Browser Tools & Systems Engineering</h3>
-            <p>Created Cricket Hub Chrome Extension (Manifest v3) with customizable new tab dashboard, background workers, and automated score fetchers.</p>
+            <h3>Chrome Extension Development</h3>
+            <p>Engineered the Cricket Hub Chrome Extension (Manifest v3) featuring custom new tab widgets, settings customization, and background fetch workers.</p>
           </div>
         </div>
 
@@ -568,7 +568,7 @@
           <div class="timeline-content">
             <span class="timeline-date">2025</span>
             <h3>Java & Systems Foundation</h3>
-            <p>Built Student Course Management System focusing on object-oriented programming principles, clean code structure, and data management.</p>
+            <p>Developed the Student Course Management System focusing on object-oriented software patterns, clean code principles, and database management.</p>
           </div>
         </div>
       </div>
@@ -579,16 +579,16 @@
   <section id="contact" class="section contact-section">
     <div class="section-container">
       <div class="section-header text-center">
-        <span class="section-tag"><i class="fa-solid fa-paper-plane"></i> Get In Touch</span>
-        <h2 class="section-title">Let's Build Something Amazing</h2>
-        <p class="section-subtitle">Have a project, job offer, or 3D web idea? Send a message directly.</p>
+        <span class="section-tag"><i class="fa-solid fa-paper-plane"></i> Contact</span>
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-subtitle">Have a project idea, job opportunity, or question? Send me a message!</p>
       </div>
 
       <div class="contact-grid">
         <!-- Contact Info Side -->
         <div class="contact-info glass-panel">
           <h3>Contact Information</h3>
-          <p>Feel free to reach out via email or connect with me on GitHub!</p>
+          <p>Feel free to send me an email or connect with me on GitHub!</p>
 
           <div class="info-list">
             <div class="info-item">
@@ -602,7 +602,7 @@
             <div class="info-item">
               <div class="info-icon"><i class="fa-brands fa-github"></i></div>
               <div>
-                <span class="info-label">GitHub Profile</span>
+                <span class="info-label">GitHub</span>
                 <a href="https://github.com/vishnuvardhan077" target="_blank" rel="noopener noreferrer" class="info-val">github.com/vishnuvardhan077</a>
               </div>
             </div>
@@ -627,7 +627,7 @@
           </div>
         </div>
 
-        <!-- Glassmorphic Contact Form -->
+        <!-- Contact Form -->
         <form class="contact-form glass-panel" id="contact-form">
           <div class="form-row">
             <div class="form-group">
@@ -642,7 +642,7 @@
 
           <div class="form-group">
             <label for="contact-subject">Subject</label>
-            <input type="text" id="contact-subject" placeholder="Project Collaboration / Opportunity" required />
+            <input type="text" id="contact-subject" placeholder="Project Opportunity / Hello" required />
           </div>
 
           <div class="form-group">
@@ -651,14 +651,14 @@
           </div>
 
           <button type="submit" class="btn btn-primary btn-glow btn-block" id="contact-submit-btn">
-            <i class="fa-solid fa-rocket"></i> Send 3D Signal
+            <i class="fa-solid fa-paper-plane"></i> Send Message
           </button>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- 3D Project Inspection Modal -->
+  <!-- Project Details Modal -->
   <div id="project-modal" class="modal-backdrop hidden">
     <div class="modal-box glass-panel">
       <button id="modal-close-btn" class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
@@ -669,7 +669,7 @@
       </div>
 
       <div class="modal-body">
-        <p id="modal-desc">Project detailed description...</p>
+        <p id="modal-desc">Project description...</p>
 
         <div class="modal-section">
           <h4>Technologies Used</h4>
@@ -682,7 +682,7 @@
           <a href="#" id="modal-repo-link" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
             <i class="fa-brands fa-github"></i> Open Repository
           </a>
-          <button class="btn btn-outline" id="modal-dismiss-btn">Close Inspector</button>
+          <button class="btn btn-outline" id="modal-dismiss-btn">Close</button>
         </div>
       </div>
     </div>
@@ -693,7 +693,7 @@
     <div class="footer-container">
       <div class="footer-left">
         <span class="logo-box">VV</span>
-        <p>© 2026 Vishnu Vardhan's Portfolio. Crafted with 3D WebGL, Three.js & Passion.</p>
+        <p>© 2026 Vishnu Vardhan. Built with React, Three.js & Modern Web Technologies.</p>
       </div>
       <div class="footer-right">
         <button id="back-to-top" class="icon-btn" title="Back to Top">
