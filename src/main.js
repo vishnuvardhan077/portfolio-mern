@@ -8,10 +8,9 @@ import { initSkillUniverse, SKILL_DATA, setLayout } from './three/skillUniverse.
 import { initPlayground, setPlaygroundGeometry, setPlaygroundColor, setPlaygroundSpeed, setPlaygroundMetalness, setPlaygroundRoughness, togglePlaygroundWireframe, spawnStudioParticles } from './three/playground.js';
 import { initProjectMini3D, updateProjectMiniColors } from './three/project3D.js';
 import { toggleAudio, playHoverSound, playClickSound, playWarpSound, isAudioEnabled } from './utils/audio.js';
-import { parseThemePrompt, THEME_DEFINITIONS } from './utils/themePromptParser.js';
+import { THEMES, getNextTheme } from './utils/themeManager.js';
 
-let currentThemeKeys = ['cyberpunk', 'purple', 'matrix', 'black', 'red', 'gold', 'blue'];
-let currentThemeIdx = 0;
+let currentThemeKey = 'dark';
 
 document.addEventListener('DOMContentLoaded', () => {
   initWelcomePortal();
@@ -30,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
 });
 
-/* Welcome Portal Overlay Handler */
+/* Welcome Overlay Handler */
 function initWelcomePortal() {
   const portal = document.getElementById('welcome-portal');
   const enterBtn = document.getElementById('enter-portal-btn');
@@ -47,7 +46,7 @@ function initWelcomePortal() {
   }
 }
 
-/* Custom Glowing Cursor Tracker */
+/* Custom Glowing Cursor */
 function initCustomCursor() {
   const cursor = document.getElementById('custom-cursor');
   const blur = document.getElementById('cursor-blur');
@@ -96,31 +95,24 @@ function initThemeSwitcher() {
 
   if (themeBtn) {
     themeBtn.addEventListener('click', () => {
-      currentThemeIdx = (currentThemeIdx + 1) % currentThemeKeys.length;
-      const key = currentThemeKeys[currentThemeIdx];
-      if (THEME_DEFINITIONS[key]) {
-        applyThemeFromDefinition(THEME_DEFINITIONS[key]);
-      }
+      const { key, theme } = getNextTheme(currentThemeKey);
+      currentThemeKey = key;
+      applyTheme(theme);
     });
   }
 }
 
-function applyThemeFromDefinition(def) {
+function applyTheme(theme) {
   playWarpSound();
   triggerParticleBurst();
 
-  document.body.className = def.className;
+  document.body.className = theme.className;
 
-  if (def.isCustomHex) {
-    document.documentElement.style.setProperty('--primary', def.primaryHex);
-    document.documentElement.style.setProperty('--border-glow', def.primaryHex);
-  }
+  updateHeroThemeColor(theme.primaryNum, theme.secondaryNum);
+  setPlaygroundColor(theme.primaryHex);
+  updateProjectMiniColors(theme.primaryHex);
 
-  updateHeroThemeColor(def.primaryNum, def.secondaryNum);
-  setPlaygroundColor(def.primaryHex);
-  updateProjectMiniColors(def.primaryHex);
-
-  showToast(`🎨 Theme: ${def.name || 'Updated'}`);
+  showToast(`🎨 Theme: ${theme.name}`);
 }
 
 function showToast(msg) {
