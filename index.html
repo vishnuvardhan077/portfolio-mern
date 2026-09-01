@@ -13,9 +13,9 @@
   
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  
-  <script type="module" crossorigin src="./assets/index-BGC3WI9H.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-CgcefP7F.css">
+  
+  <script type="module" crossorigin src="./assets/index-C2GzH_6H.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CaDOJIzW.css">
 </head>
 <body class="theme-cyberpunk">
   <!-- Custom Glowing Cursor -->
@@ -56,10 +56,13 @@
             <i class="fa-solid fa-palette"></i>
           </button>
           <div class="theme-menu" id="theme-menu">
+            <button data-theme="theme-black" class="theme-opt"><span class="dot" style="background:#fff;"></span> Pitch Black</button>
             <button data-theme="theme-cyberpunk" class="theme-opt active"><span class="dot cyberpunk"></span> Cyberpunk</button>
             <button data-theme="theme-purple" class="theme-opt"><span class="dot purple"></span> Neon Violet</button>
             <button data-theme="theme-matrix" class="theme-opt"><span class="dot matrix"></span> Matrix Emerald</button>
             <button data-theme="theme-gold" class="theme-opt"><span class="dot gold"></span> Solar Gold</button>
+            <button data-theme="theme-red" class="theme-opt"><span class="dot" style="background:#ef4444;"></span> Crimson Red</button>
+            <button data-theme="theme-blue" class="theme-opt"><span class="dot" style="background:#3b82f6;"></span> Midnight Blue</button>
           </div>
         </div>
 
@@ -90,6 +93,20 @@
         Crafting Next-Gen <br />
         <span class="gradient-text typewriter" id="typewriter">3D Web Experiences</span>
       </h1>
+
+      <!-- AI Prompt Theme Customizer Bar -->
+      <div class="prompt-theme-box glass-panel">
+        <i class="fa-solid fa-wand-magic-sparkles prompt-icon"></i>
+        <input type="text" id="prompt-theme-input" class="prompt-input" placeholder="✨ Type a prompt e.g. 'change theme to black', 'matrix green', 'cyberpunk'..." />
+        <button id="mic-btn" class="mic-btn" title="Voice Search Theme"><i class="fa-solid fa-microphone"></i></button>
+      </div>
+
+      <div class="prompt-suggestions">
+        <button class="prompt-chip" data-prompt="change theme to black">⚡ "change theme to black"</button>
+        <button class="prompt-chip" data-prompt="change theme to cyberpunk">🌌 "change theme to cyberpunk"</button>
+        <button class="prompt-chip" data-prompt="change theme to matrix green">🟢 "change theme to matrix green"</button>
+        <button class="prompt-chip" data-prompt="change theme to neon purple">🔮 "change theme to neon purple"</button>
+      </div>
 
       <p class="hero-subtitle">
         Hi! I'm <strong class="text-white">Vishnu Vardhan</strong> — Full-Stack MERN Engineer & 3D Interactive Web Developer building high-performance web applications, WebGL graphics, and robust backends.
@@ -687,5 +704,6 @@
       </div>
     </div>
   </footer>
+
 </body>
 </html>

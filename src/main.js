@@ -7,11 +7,13 @@ import { initHeroScene, toggleWireframe, switchGeometryCore, triggerParticleBurs
 import { initSkillUniverse, SKILL_DATA, setLayout } from './three/skillUniverse.js';
 import { initPlayground, setPlaygroundGeometry, setPlaygroundColor, setPlaygroundSpeed, setPlaygroundMetalness, setPlaygroundRoughness, togglePlaygroundWireframe, spawnStudioParticles } from './three/playground.js';
 import { toggleAudio, playHoverSound, playClickSound, playWarpSound, isAudioEnabled } from './utils/audio.js';
+import { parseThemePrompt, THEME_DEFINITIONS } from './utils/themePromptParser.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initCustomCursor();
   initAudioControls();
   initThemeSwitcher();
+  initAIPromptThemeCustomizer();
   initHeroSection();
   initTypewriter();
   initSkillsUniverseSection();
@@ -39,7 +41,7 @@ function initCustomCursor() {
   });
 
   // Scale up on interactive hover
-  const interactables = document.querySelectorAll('a, button, input, textarea, .tilt-card, .btn-chip');
+  const interactables = document.querySelectorAll('a, button, input, textarea, .tilt-card, .btn-chip, .prompt-chip');
   interactables.forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.style.width = '24px';
@@ -78,30 +80,128 @@ function initAudioControls() {
 function initThemeSwitcher() {
   const themeOpts = document.querySelectorAll('.theme-opt');
   
-  const themeColors = {
-    'theme-cyberpunk': { primary: 0x06b6d4, secondary: 0x8b5cf6, hexPrimary: '#06b6d4' },
-    'theme-purple': { primary: 0xa855f7, secondary: 0xec4899, hexPrimary: '#a855f7' },
-    'theme-matrix': { primary: 0x10b981, secondary: 0x06b6d4, hexPrimary: '#10b981' },
-    'theme-gold': { primary: 0xf59e0b, secondary: 0xef4444, hexPrimary: '#f59e0b' }
-  };
-
   themeOpts.forEach(btn => {
     btn.addEventListener('click', () => {
       playClickSound();
       const theme = btn.getAttribute('data-theme');
-      
-      document.body.className = theme;
+      const themeKey = theme.replace('theme-', '');
 
       themeOpts.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      if (themeColors[theme]) {
-        const { primary, secondary, hexPrimary } = themeColors[theme];
-        updateHeroThemeColor(primary, secondary);
-        setPlaygroundColor(hexPrimary);
+      if (THEME_DEFINITIONS[themeKey]) {
+        applyThemeFromDefinition(THEME_DEFINITIONS[themeKey]);
       }
     });
   });
+}
+
+/* AI Prompt Theme Customizer Engine */
+function initAIPromptThemeCustomizer() {
+  const input = document.getElementById('prompt-theme-input');
+  const micBtn = document.getElementById('mic-btn');
+  const chips = document.querySelectorAll('.prompt-chip');
+
+  if (input) {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        processPrompt(input.value);
+      }
+    });
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const prompt = chip.getAttribute('data-prompt');
+      if (input) input.value = prompt;
+      processPrompt(prompt);
+    });
+  });
+
+  // Web Speech API Voice Recognition
+  if (micBtn) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.lang = 'en-US';
+
+      micBtn.addEventListener('click', () => {
+        playWarpSound();
+        micBtn.classList.add('listening');
+        showToast('🎙️ Listening for voice prompt...');
+        try {
+          recognition.start();
+        } catch (err) {
+          micBtn.classList.remove('listening');
+        }
+      });
+
+      recognition.onresult = (event) => {
+        micBtn.classList.remove('listening');
+        const transcript = event.results[0][0].transcript;
+        if (input) input.value = transcript;
+        processPrompt(transcript);
+      };
+
+      recognition.onerror = () => {
+        micBtn.classList.remove('listening');
+        showToast('Mic error. Type prompt instead!');
+      };
+
+      recognition.onend = () => {
+        micBtn.classList.remove('listening');
+      };
+    } else {
+      micBtn.addEventListener('click', () => {
+        showToast('Type your prompt in the search box!');
+      });
+    }
+  }
+}
+
+function processPrompt(promptText) {
+  if (!promptText) return;
+  const themeDef = parseThemePrompt(promptText);
+
+  if (themeDef) {
+    applyThemeFromDefinition(themeDef);
+  }
+}
+
+function applyThemeFromDefinition(def) {
+  playWarpSound();
+  triggerParticleBurst();
+
+  document.body.className = def.className;
+
+  if (def.isCustomHex) {
+    document.documentElement.style.setProperty('--primary', def.primaryHex);
+    document.documentElement.style.setProperty('--border-glow', def.primaryHex);
+  }
+
+  // Update Three.js 3D WebGL Scene Lights and Core Colors
+  updateHeroThemeColor(def.primaryNum, def.secondaryNum);
+  setPlaygroundColor(def.primaryHex);
+
+  // Update active state in theme dropdown
+  const themeOpts = document.querySelectorAll('.theme-opt');
+  themeOpts.forEach(b => {
+    const attr = b.getAttribute('data-theme');
+    b.classList.toggle('active', attr === def.className);
+  });
+
+  showToast(`🎨 ${def.desc || 'Theme updated!'}`);
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('audio-toast');
+  const toastText = document.getElementById('toast-text');
+  if (toast && toastText) {
+    toastText.textContent = msg;
+    toast.classList.remove('hidden');
+    setTimeout(() => toast.classList.add('hidden'), 3500);
+  }
 }
 
 /* Hero Section 3D Scene */
@@ -171,7 +271,7 @@ function initTypewriter() {
     let typeSpeed = isDeleting ? 40 : 80;
 
     if (!isDeleting && charIdx === current.length) {
-      typeSpeed = 2000; // Pause at full text
+      typeSpeed = 2000;
       isDeleting = true;
     } else if (isDeleting && charIdx === 0) {
       isDeleting = false;
@@ -197,7 +297,7 @@ function initSkillsUniverseSection() {
 
   const layoutBtns = document.querySelectorAll('.layout-toggle-btns .btn-chip');
   layoutBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', () => {
       playClickSound();
       layoutBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -360,7 +460,6 @@ async function initGitHubSync() {
           descEl.textContent = repo.description;
         }
 
-        // Add star count badge if stars exist
         if (repo.stargazers_count > 0) {
           const tags = card.querySelector('.project-tags');
           if (tags) {
@@ -370,7 +469,7 @@ async function initGitHubSync() {
       }
     });
   } catch (e) {
-    // Fallback gracefully if offline
+    // Fallback gracefully
   }
 }
 
@@ -385,7 +484,6 @@ function init3DStudioSection() {
     });
   }
 
-  // Geometry selector chips
   const geoChips = document.querySelectorAll('.studio-controls-panel .chip-btn');
   geoChips.forEach(chip => {
     chip.addEventListener('click', () => {
@@ -396,7 +494,6 @@ function init3DStudioSection() {
     });
   });
 
-  // Color selector dots
   const colorDots = document.querySelectorAll('.color-dot');
   colorDots.forEach(dot => {
     dot.addEventListener('click', () => {
@@ -407,7 +504,6 @@ function init3DStudioSection() {
     });
   });
 
-  // Sliders
   const speedSlider = document.getElementById('slider-speed');
   if (speedSlider) {
     speedSlider.addEventListener('input', (e) => {
@@ -432,7 +528,6 @@ function init3DStudioSection() {
     });
   }
 
-  // Action buttons
   const wireframeBtn = document.getElementById('studio-wireframe-toggle');
   if (wireframeBtn) {
     wireframeBtn.addEventListener('click', () => {
@@ -454,8 +549,6 @@ function init3DStudioSection() {
 /* Contact Form Handling */
 function initContactForm() {
   const form = document.getElementById('contact-form');
-  const toast = document.getElementById('audio-toast');
-  const toastText = document.getElementById('toast-text');
 
   if (!form) return;
 
@@ -463,13 +556,7 @@ function initContactForm() {
     e.preventDefault();
     playWarpSound();
     triggerParticleBurst();
-
-    if (toast && toastText) {
-      toastText.textContent = '🚀 3D Signal Transmitted to Vishnu!';
-      toast.classList.remove('hidden');
-      setTimeout(() => toast.classList.add('hidden'), 4000);
-    }
-
+    showToast('🚀 3D Signal Transmitted to Vishnu!');
     form.reset();
   });
 }
