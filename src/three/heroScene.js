@@ -117,22 +117,47 @@ function createCoreMesh(geoType) {
 function createSatellites() {
   satelliteGroup = new THREE.Group();
 
-  const satGeo = new THREE.IcosahedronGeometry(0.25, 0);
+  // Orbit Ring 1 (3D Torus Model)
+  const ringGeo1 = new THREE.TorusGeometry(3.4, 0.04, 16, 100);
+  const ringMat1 = new THREE.MeshBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.5, wireframe: true });
+  const ring1 = new THREE.Mesh(ringGeo1, ringMat1);
+  ring1.rotation.x = Math.PI / 3;
+  satelliteGroup.add(ring1);
+
+  // Orbit Ring 2 (3D Torus Model Inclined)
+  const ringGeo2 = new THREE.TorusGeometry(4.2, 0.03, 16, 100);
+  const ringMat2 = new THREE.MeshBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.4, wireframe: true });
+  const ring2 = new THREE.Mesh(ringGeo2, ringMat2);
+  ring2.rotation.y = Math.PI / 4;
+  ring2.rotation.x = -Math.PI / 4;
+  satelliteGroup.add(ring2);
+
+  // Diverse 3D Satellites (Octahedrons, Tetrahedrons, Dodecahedrons)
+  const geometries = [
+    new THREE.OctahedronGeometry(0.3, 0),
+    new THREE.TetrahedronGeometry(0.35, 0),
+    new THREE.DodecahedronGeometry(0.28, 0),
+    new THREE.IcosahedronGeometry(0.3, 0),
+    new THREE.TorusGeometry(0.25, 0.08, 16, 32),
+  ];
+
   const satMat = new THREE.MeshStandardMaterial({
     color: 0x8b5cf6,
     roughness: 0.2,
     metalness: 0.9,
     emissive: 0x8b5cf6,
-    emissiveIntensity: 0.5,
+    emissiveIntensity: 0.6,
+    flatShading: true,
   });
 
-  for (let i = 0; i < 6; i++) {
-    const sat = new THREE.Mesh(satGeo, satMat);
-    const angle = (i / 6) * Math.PI * 2;
-    const radius = 3.2;
+  for (let i = 0; i < 8; i++) {
+    const geo = geometries[i % geometries.length];
+    const sat = new THREE.Mesh(geo, satMat);
+    const angle = (i / 8) * Math.PI * 2;
+    const radius = 3.4 + (i % 2 === 0 ? 0.8 : -0.4);
     sat.position.x = Math.cos(angle) * radius;
     sat.position.y = Math.sin(angle) * radius;
-    sat.position.z = (Math.random() - 0.5) * 1.5;
+    sat.position.z = (Math.random() - 0.5) * 2;
     satelliteGroup.add(sat);
   }
 
