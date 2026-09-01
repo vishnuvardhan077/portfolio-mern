@@ -88,6 +88,110 @@ body.theme-blue {
   --border-glow: rgba(59, 130, 246, 0.6);
 }
 
+/* 3D Holographic Welcome Portal Entrance Overlay */
+.welcome-portal {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: radial-gradient(circle at center, rgba(12, 16, 28, 0.95) 0%, rgba(4, 5, 8, 0.98) 100%);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 1;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.welcome-portal.fade-out {
+  opacity: 0;
+  transform: scale(1.1);
+  pointer-events: none;
+}
+
+.portal-card {
+  max-width: 620px;
+  width: 100%;
+  padding: 48px 36px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 0 60px rgba(var(--primary-rgb), 0.3);
+}
+
+.portal-emblem {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+  color: var(--primary);
+}
+
+.emblem-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px dashed var(--primary);
+  animation: spin 12s linear infinite;
+}
+
+.emblem-core {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.4rem;
+  box-shadow: 0 0 25px rgba(var(--primary-rgb), 0.6);
+}
+
+.portal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border-radius: var(--radius-full);
+  background: rgba(var(--primary-rgb), 0.15);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.portal-title {
+  font-size: 2.8rem;
+  font-weight: 900;
+  margin-bottom: 14px;
+  line-height: 1.25;
+}
+
+.portal-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.portal-btn {
+  padding: 16px 36px;
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: var(--radius-full);
+}
+
 /* AI Prompt Theme Customizer Bar */
 .prompt-theme-box {
   width: 100%;

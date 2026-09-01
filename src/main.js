@@ -14,6 +14,7 @@ let currentThemeKeys = ['black', 'cyberpunk', 'matrix', 'purple', 'red', 'gold',
 let currentThemeIdx = 1;
 
 document.addEventListener('DOMContentLoaded', () => {
+  initWelcomePortal();
   initCustomCursor();
   initAudioControls();
   initAIPromptThemeCustomizer();
@@ -28,6 +29,23 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initNavigation();
 });
+
+/* 3D Holographic Welcome Portal */
+function initWelcomePortal() {
+  const portal = document.getElementById('welcome-portal');
+  const enterBtn = document.getElementById('enter-portal-btn');
+
+  if (enterBtn && portal) {
+    enterBtn.addEventListener('click', () => {
+      playWarpSound();
+      triggerParticleBurst();
+      portal.classList.add('fade-out');
+      setTimeout(() => {
+        portal.style.display = 'none';
+      }, 800);
+    });
+  }
+}
 
 /* Custom Glowing Cursor Tracker */
 function initCustomCursor() {
@@ -78,7 +96,6 @@ function initAIPromptThemeCustomizer() {
   const micBtn = document.getElementById('mic-btn');
   const aiMorphBtn = document.getElementById('ai-theme-morph-btn');
 
-  // Single AI Morph Button (cycles through themes)
   if (aiMorphBtn) {
     aiMorphBtn.addEventListener('click', () => {
       currentThemeIdx = (currentThemeIdx + 1) % currentThemeKeys.length;
@@ -89,7 +106,6 @@ function initAIPromptThemeCustomizer() {
     });
   }
 
-  // Single AI Prompt Input Box
   if (input) {
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
@@ -98,7 +114,6 @@ function initAIPromptThemeCustomizer() {
     });
   }
 
-  // Web Speech API Voice Recognition
   if (micBtn) {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRecognition) {
@@ -160,7 +175,6 @@ function applyThemeFromDefinition(def) {
     document.documentElement.style.setProperty('--border-glow', def.primaryHex);
   }
 
-  // Update Three.js 3D WebGL Scene Lights and Core Colors
   updateHeroThemeColor(def.primaryNum, def.secondaryNum);
   setPlaygroundColor(def.primaryHex);
   updateProjectMiniColors(def.primaryHex);
